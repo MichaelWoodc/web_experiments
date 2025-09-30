@@ -1,0 +1,11 @@
+# Ignore the entire experiment_data folder
+Colliding_Stimuli/experiment_data/
+
+# Ignore specific files within the experiment_data folder
+Colliding_Stimuli/experiment_data/*.txt
+
+# Additional entries you already have
+Colliding_Stimuli/__pycache__/
+Colliding_Stimuli/backup/
+experiment_data/2_2024-06-30.txt
+experiment_data/1_2024-06-30.txt

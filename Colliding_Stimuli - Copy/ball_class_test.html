@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stimuli</title>
+    <style>
+        /* Disable text selection globally */
+        * {
+            user-select: none; /* Disable selection for all elements */
+            -webkit-user-select: none; /* Safari */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+        }
+
+        canvas {
+            border: 2px solid black;
+        }
+
+        /* Disable button highlight */
+        button {
+            pointer-events: none; /* Disable interaction with button */
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <button id="downloadResults">Download Results</button>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const reinforcementTexts = [];
+        let totalScore = 0;
+        let gameResults = [];
+
+        class Ball {
+            constructor(x, y, radius, color) {
+                this.x = x;
+                this.y = y;
+                this.radius = radius;
+                this.color = color;
+                this.dx = Math.random() * 4 - 2;
+                this.dy = Math.random() * 4 - 2;
+                this.clicked = false;
+                this.score = 0;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.closePath();
+            }
+
+            move() {
+                this.x += this.dx;
+                this.y += this.dy;
+
+                // Bounce off walls
+                if (this.x + this.radius > canvas.width || this.x - this.radius < 0) this.dx *= -1;
+                if (this.y + this.radius > canvas.height || this.y - this.radius < 0) this.dy *= -1;
+            }
+        }
+
+        const balls = [
+            new Ball(100, 100, 30, 'red'),
+            new Ball(200, 150, 30, 'blue')
+        ];
+
+        function addReinforcementText(x, y) {
+            reinforcementTexts.push({ x: x, y: y, alpha: 1.0, fontSize: 24 });
+        }
+
+        function drawReinforcementTexts() {
+            reinforcementTexts.forEach((textObj, index) => {
+                textObj.y -= 1;
+                textObj.alpha -= 0.02;
+                textObj.fontSize += 0.5;
+                textObj.text = '+1';
+                if (textObj.alpha <= 0) {
+                    reinforcementTexts.splice(index, 1);
+                } else {
+                    const font = `${textObj.fontSize}px Arial`;
+                    const outlineColor = 'rgba(0, 0, 0, ' + textObj.alpha + ')';
+                    const fillColor = `rgba(255, 255, 255, ${textObj.alpha})`;
+                    const x = textObj.x;
+                    const y = textObj.y;
+                    const outlineThickness = 2;
+
+                    ctx.font = font;
+
+                    ctx.fillStyle = outlineColor;
+                    ctx.fillText(textObj.text, x - outlineThickness, y - outlineThickness);
+                    ctx.fillText(textObj.text, x, y - outlineThickness);
+                    ctx.fillText(textObj.text, x + outlineThickness, y - outlineThickness);
+                    ctx.fillText(textObj.text, x - outlineThickness, y);
+                    ctx.fillText(textObj.text, x + outlineThickness, y);
+                    ctx.fillText(textObj.text, x - outlineThickness, y + outlineThickness);
+                    ctx.fillText(textObj.text, x, y + outlineThickness);
+                    ctx.fillText(textObj.text, x + outlineThickness, y + outlineThickness);
+
+                    ctx.fillStyle = fillColor;
+                    ctx.fillText(textObj.text, x, y);
+                }
+            });
+        }
+
+        function updateGame() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            balls.forEach(ball => {
+                ball.move();
+                ball.draw();
+            });
+
+            drawReinforcementTexts();
+
+            requestAnimationFrame(updateGame);
+        }
+
+        canvas.addEventListener('mousedown', function (event) {
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = event.clientX - rect.left;
+            const mouseY = event.clientY - rect.top;
+
+            balls.forEach(ball => {
+                const distance = Math.hypot(mouseX - ball.x, mouseY - ball.y);
+                if (distance < ball.radius) {
+                    ball.clicked = true;
+                    ball.score += 1;
+                    totalScore += 1;
+
+                    addReinforcementText(ball.x, ball.y);
+
+                    const log = `Time: ${Date.now()}, Ball Color: ${ball.color}, Score: ${totalScore}`;
+                    gameResults.push(log);
+                }
+            });
+
+            event.stopPropagation(); // Confine clicks to the canvas
+        });
+
+        document.getElementById('downloadResults').addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent default action
+
+            const blob = new Blob([gameResults.join('\n')], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'game_results.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        // Disable right-click globally
+        document.addEventListener('contextmenu', function (event) {
+            event.preventDefault(); // Disable right-click context menu
+        });
+
+        updateGame();
+    </script>
+</body>
+</html>

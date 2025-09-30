@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stimuli</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = 800;
+        canvas.height = 600;
+
+        class Ball {
+            constructor(x, y, dx, dy, radius, baseColor, clickedColor, speed, changeToClicks, changeToDelay, changeFromClicks, changeFromDelay, blockScoreUntilClicks, blockScoreUntilTime, timeRequired, clicksRequired) {
+                this.x = x;
+                this.y = y;
+                this.dx = dx;
+                this.dy = dy;
+                this.radius = radius;
+                this.baseColor = baseColor;
+                this.clickedColor = clickedColor;
+                this.speed = speed;
+                this.changeToClicks = changeToClicks;
+                this.changeToDelay = changeToDelay;
+                this.changeFromClicks = changeFromClicks;
+                this.changeFromDelay = changeFromDelay;
+                this.blockScoreUntilClicks = blockScoreUntilClicks;
+                this.blockScoreUntilTime = blockScoreUntilTime;
+                this.timeRequired = timeRequired;
+                this.clicksRequired = clicksRequired;
+                this.color = baseColor;
+            }
+
+            advance(dt) {
+                this.x += this.dx * dt;
+                this.y += this.dy * dt;
+
+                if (this.x < this.radius || this.x > canvas.width - this.radius) {
+                    this.dx *= -1;
+                }
+
+                if (this.y < this.radius || this.y > canvas.height - this.radius) {
+                    this.dy *= -1;
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.closePath();
+            }
+        }
+
+        class Simulation {
+            constructor(options) {
+                this.balls = [];
+                this.reinforcementTexts = [];
+                this.initBalls(options);
+            }
+
+            initBalls(options) {
+                const { numberBalls, initialSpeed, radii, baseColors, clickedColors } = options;
+                for (let i = 0; i < numberBalls; i++) {
+                    const radius = radii[i];
+                    const speed = initialSpeed[i] / 10;
+                    let x, y, dx, dy;
+                    do {
+                        x = Math.random() * (canvas.width - 2 * radius) + radius;
+                        y = Math.random() * (canvas.height - 2 * radius) + radius;
+                        const angle = Math.random() * 2 * Math.PI;
+                        dx = (Math.random() < 0.5 ? -1 : 1) * speed * Math.cos(angle);
+                        dy = (Math.random() < 0.5 ? -1 : 1) * speed * Math.sin(angle);
+                    } while (this.balls.some(ball => Math.hypot(ball.x - x, ball.y - y) < ball.radius + radius));
+
+                    const ball = new Ball(
+                        x, y, dx, dy, radius,
+                        baseColors[i], clickedColors[i],
+                        initialSpeed[i], 0, 0, 0, 0, 0, 0, 0, 0
+                    );
+
+                    this.balls.push(ball);
+                }
+            }
+
+            addReinforcementText(x, y) {
+                this.reinforcementTexts.push({
+                    text: '+1',
+                    x: x,
+                    y: y,
+                    fontSize: 36,
+                    alpha: 255
+                });
+            }
+
+            updateReinforcementTexts() {
+                for (const text of this.reinforcementTexts) {
+                    text.y -= 1;
+                    text.fontSize += 1;
+                    text.alpha -= 5;
+                }
+                this.reinforcementTexts = this.reinforcementTexts.filter(text => text.alpha > 0);
+            }
+
+            drawReinforcementTexts() {
+                for (const text of this.reinforcementTexts) {
+                    ctx.font = `${text.fontSize}px Arial`;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillStyle = `rgba(255, 255, 255, ${text.alpha / 255})`;
+                    ctx.strokeStyle = 'black';
+                    ctx.lineWidth = 2;
+
+                    ctx.strokeText(text.text, text.x, text.y);
+                    ctx.fillText(text.text, text.x, text.y);
+                }
+            }
+
+            handleCollisions() {
+                for (let i = 0; i < this.balls.length; i++) {
+                    for (let j = i + 1; j < this.balls.length; j++) {
+                        const b1 = this.balls[i];
+                        const b2 = this.balls[j];
+                        if (Math.hypot(b1.x - b2.x, b1.y - b2.y) < b1.radius + b2.radius) {
+                            this.changeVelocities(b1, b2);
+                        }
+                    }
+                }
+            }
+
+            changeVelocities(ball1, ball2) {
+                const m1 = ball1.radius ** 2;
+                const m2 = ball2.radius ** 2;
+                const M = m1 + m2;
+                const r1 = [ball1.x, ball1.y];
+                const r2 = [ball2.x, ball2.y];
+                const d = Math.hypot(r1[0] - r2[0], r1[1] - r2[1]) ** 2;
+                const v1 = [ball1.dx, ball1.dy];
+                const v2 = [ball2.dx, ball2.dy];
+                const u1 = [
+                    v1[0] - 2 * m2 / M * ((v1[0] - v2[0]) * (r1[0] - r2[0]) + (v1[1] - v2[1]) * (r1[1] - r2[1])) / d * (r1[0] - r2[0]),
+                    v1[1] - 2 * m2 / M * ((v1[0] - v2[0]) * (r1[0] - r2[0]) + (v1[1] - v2[1]) * (r1[1] - r2[1])) / d * (r1[1] - r2[1])
+                ];
+                const u2 = [
+                    v2[0] - 2 * m1 / M * ((v2[0] - v1[0]) * (r2[0] - r1[0]) + (v2[1] - v1[1]) * (r2[1] - r1[1])) / d * (r2[0] - r1[0]),
+                    v2[1] - 2 * m1 / M * ((v2[0] - v1[0]) * (r2[0] - r1[0]) + (v2[1] - v1[1]) * (r2[1] - r1[1])) / d * (r2[1] - r1[1])
+                ];
+                ball1.dx = u1[0];
+                ball1.dy = u1[1];
+                ball2.dx = u2[0];
+                ball2.dy = u2[1];
+            }
+
+            advance(dt) {
+                for (const ball of this.balls) {
+                    ball.advance(dt);
+                }
+                this.handleCollisions();
+            }
+
+            draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (const ball of this.balls) {
+                    ball.draw();
+                }
+                this.updateReinforcementTexts();
+                this.drawReinforcementTexts();
+            }
+        }
+
+        const simulation = new Simulation({
+            numberBalls: 5,
+            initialSpeed: [10000, 1200, 1400, 1600, 1800],
+            radii: [20, 25, 30, 35, 40],
+            baseColors: ['red', 'green', 'blue', 'yellow', 'purple'],
+            clickedColors: ['darkred', 'darkgreen', 'darkblue', 'darkyellow', 'darkpurple']
+        });
+
+        let lastTime = 0;
+        function gameLoop(timestamp) {
+            const dt = (timestamp - lastTime) / 1000;
+            lastTime = timestamp;
+
+            simulation.advance(dt);
+            simulation.draw();
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        requestAnimationFrame(gameLoop);
+    </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+Participant ID: 
+Number of Phases: 2
+Radii: [60,60,60,60,60,60,60]
+Reinforcement Ratio: [1,1,1,1,1,1,1]
+Reinforcement Interval: [1,1,1,1,1,1,1]
+Clicked Color: 
+Color: 
+Speed: [1,1,1,1,1,1,1]
+Number of Balls: 7
+Duration of Phase: 10
+Radii: [60,60,60,60,60,60,60]
+Reinforcement Ratio: [1,1,1,1,1,1,1]
+Reinforcement Interval: [1,1,1,1,1,1,1]
+Clicked Color: 
+Color: 
+Speed: [1,1,1,1,1,1,1]
+Number of Balls: 2
+Duration of Phase: 10

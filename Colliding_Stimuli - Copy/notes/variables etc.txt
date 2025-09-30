@@ -1,0 +1,22 @@
+number_phases = 2
+phase_duration = 5
+number_balls = 3
+
+fixed_interval = [1,1,1,1,1,1,1]
+variable_interval = [(.5,1.5),(.5,1.5),(.5,1.5),(.5,1.5),(.5,1.5),(.5,1.5),(.5,1.5)]#(min,max)
+
+fixed_ratio = [1,1,1,1,1,1,1]
+variable_ratio = [(2,4),(2,4),(2,4),(2,4),(2,4),(2,4),(2,4)]
+
+change_from_delay = [2,2,2,2,2,2,2]
+change_to_delay = [1,1,1,1,1,1,1]
+
+initial_speed = [1,1,1,1,1,1,1]
+speed_limits = [(.5,1.5),(.5,1.5),(.5,1.5),(.5,1.5),(.5,1.5),(.5,1.5),(.5,1.5)]#(min,max)
+
+base_colors = [RED, ORANGE, YELLOW, GREEN, BLUE, INDIGO, VIOLET]  # Rainbow colors
+clicked_colors = [DARK_RED, DARK_ORANGE, DARK_YELLOW, DARK_GREEN, DARK_BLUE, DARK_INDIGO, DARK_VIOLET]  # Darker shades of rainbow colors
+radii = [60,60,60,60,60,60,60]
+change_over_delay = [2,2,2,2,2,2,2]
+block_score_until_time = [0,0,0,0,0,0,0]
+block_score_until_clicks = [0,0,0,0,0,0,0]

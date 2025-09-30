@@ -1,0 +1,7 @@
+Fri 13 Sep 2024, 08:52PM
+################# Phase 1 ######################
+################# INIT balls ######################
+0, Init stimuli, 0, 
+1.273, 0, Clicked: None, x=924, y=590, Clicked: None, x=924, y=590, Clicked: YELLOW, x=924,  y=590,  RED: x=1134,  y=245,  dx=-0.07741106964776337,  dy=0.06330502583515095,  clicks=0,  score=0, ORANGE: x=956,  y=356,  dx=-0.012379605099324493,  dy=0.09923076830088932,  clicks=0,  score=0, DARK_YELLOW: x=927,  y=636,  dx=0.02672607060186205,  dy=0.09636242602894701,  clicks=1,  score=1,
+1.717, 1, Clicked: None, x=950, y=676, Clicked: None, x=950, y=676, Clicked: YELLOW, x=950,  y=676,  RED: x=1092,  y=279,  dx=-0.07741106964776337,  dy=0.06330502583515095,  clicks=0,  score=0, ORANGE: x=950,  y=410,  dx=-0.012379605099324493,  dy=0.09923076830088932,  clicks=0,  score=0, DARK_YELLOW: x=941,  y=688,  dx=0.02672607060186205,  dy=0.09636242602894701,  clicks=2,  score=2,
+2.211, 2, Clicked: None, x=986, y=493, Clicked: ORANGE, x=986,  y=493,  RED: x=1045,  y=317,  dx=-0.07741106964776337,  dy=0.06330502583515095,  clicks=0,  score=0, DARK_ORANGE: x=942,  y=469,  dx=-0.012379605099324493,  dy=0.09923076830088932,  clicks=1,  score=0, YELLOW: x=957,  y=734,  dx=0.02672607060186205,  dy=-0.09636242602894701,  clicks=2,  score=2,

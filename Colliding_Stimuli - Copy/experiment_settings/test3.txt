@@ -1,0 +1,20 @@
+Participant ID: 
+Number of Phases: 2
+Radius: asdf
+Reinforcement Value: asdf
+Reinforcement Type: asdf
+Color: asdf
+Max Score Rate: asdf
+Speed Limits: asdf
+Initial Speed: asdf
+Number of Balls: asdf
+Duration of Phase: asdf
+Radius: asdf
+Reinforcement Value: asdf
+Reinforcement Type: asdf
+Color: sdaf
+Max Score Rate: asdf
+Speed Limits: asdf
+Initial Speed Range: asdf
+Number of Balls: asdf
+Duration of Phase: asdf

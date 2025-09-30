@@ -1,0 +1,22 @@
+Participant ID: 
+Number of Phases: 2
+Radius: [60,60,60,60,60,60,60]
+Reinforcement Ratio: [1,1,1,1,1,1,1]
+Reinforcement Interval: [1,1,1,1,1,1,1]
+Clicked Color: [DARK_RED, DARK_ORANGE, DARK_YELLOW, DARK_GREEN, DARK_BLUE, DARK_INDIGO, DARK_VIOLET]
+Color: [RED, ORANGE, YELLOW, GREEN, BLUE, INDIGO, VIOLET]
+Max Score Rate: [0.5,0.5,0.5,0.5,0.5,0.5,0.5]
+Speed Limits: [(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1) ]
+Initial Speed: 5,1,1,1,1,1,1
+Number of Balls: 4
+Duration of Phase: 5
+Radius: [60,60,60,60,60,60,60]
+Reinforcement Ratio: [1,1,1,1,1,1,1]
+Reinforcement Interval: [1,1,1,1,1,1,1]
+Clicked Color: [DARK_RED, DARK_ORANGE, DARK_YELLOW, DARK_GREEN, DARK_BLUE, DARK_INDIGO, DARK_VIOLET]
+Color: [RED, ORANGE, YELLOW, GREEN, BLUE, INDIGO, VIOLET]
+Max Score Rate: [0.5,0.5,0.5,0.5,0.5,0.5,0.5]
+Speed Limits: [(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1) ]
+Initial Speed: 1,1,1,1,1,1,1
+Number of Balls: 4
+Duration of Phase: 5
