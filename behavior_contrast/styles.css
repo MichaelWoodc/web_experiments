@@ -1,0 +1,201 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: black;
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+#container {
+    position: center;
+    /* max-width: 90%; */
+    max-height: 1000px;
+    height: 100vh;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#instructions {
+    max-width: 80%;
+    margin: 20px auto;
+    font-size: 24px;
+    line-height: 1.5;
+    text-shadow: 
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+}
+
+#mainSquare {
+    width: 250px;
+    height: 250px;
+    background-color: white;
+    margin: 20px auto;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#pointsSquare {
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    position: absolute;
+    right: 100px;
+    bottom: 100px;
+    cursor: pointer;
+    display: none;
+}
+
+#scoreDisplay {
+    position: absolute;
+    left: 250px;
+    top: 50px;
+    font-size: 48px;
+    text-shadow: 
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+}
+
+#infoText {
+    font-size: 20px;
+    margin: 20px auto;
+    max-width: 80%;
+    text-shadow: 
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+}
+
+#consentForm {
+    background-color: #333;
+    padding: 10px 50px 5px 50px;
+    border-radius: 10px;
+    max-width: 1800px;
+    /* margin: 20px auto; */
+    text-align: left;
+    /* max-height: 80vh; */
+    overflow-y: auto;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: white;
+    text-shadow: 
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+}
+
+select, input[type="text"], textarea {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    text-shadow: 
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.consent-text {
+    background-color: #444;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 10px 0;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+/* Webgazer styles */
+#webgazerVideoContainer {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 200px;
+    height: 150px;
+    z-index: 1000;
+    border: 2px solid white;
+    display: none;
+}
+
+#webgazerVideoContainer video {
+    width: 100%;
+    height: 100%;
+}
+
+.calibration-dot {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    z-index: 1001;
+}
+
+/* Add this to your existing styles */
+#gazeDot {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(255, 0, 0, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+.calibration-dot {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    z-index: 1001;
+}

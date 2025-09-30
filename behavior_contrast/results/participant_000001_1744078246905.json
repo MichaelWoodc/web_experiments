@@ -1,0 +1,152 @@
+{
+    "participant": "000001",
+    "gender": "Female",
+    "age": "21",
+    "componentOrder": [
+        1,
+        2,
+        1,
+        2,
+        3,
+        4,
+        3,
+        4
+    ],
+    "phases": [
+        {
+            "component": 1,
+            "startTime": 0,
+            "settings": {
+                "random_min_time": 10,
+                "random_max_time": 20,
+                "end_phase_at_time": 120,
+                "points_per_click": 1,
+                "background": "green",
+                "text_color": "white",
+                "instructions_text": "Phase 1 Instructions",
+                "points_instructions": "Click the small square fast to earn points!"
+            }
+        },
+        {
+            "component": 2,
+            "startTime": 123.013,
+            "settings": {
+                "random_min_time": 10,
+                "random_max_time": 20,
+                "end_phase_at_time": 120,
+                "points_per_click": 1,
+                "background": "yellow",
+                "text_color": "black",
+                "instructions_text": "Phase 2 Instructions",
+                "points_instructions": ""
+            }
+        },
+        {
+            "component": 1,
+            "startTime": 246.019,
+            "settings": {
+                "random_min_time": 10,
+                "random_max_time": 20,
+                "end_phase_at_time": 120,
+                "points_per_click": 1,
+                "background": "green",
+                "text_color": "white",
+                "instructions_text": "Phase 1 Instructions",
+                "points_instructions": "Click the small square fast to earn points!"
+            }
+        },
+        {
+            "component": 2,
+            "startTime": 369.015,
+            "settings": {
+                "random_min_time": 10,
+                "random_max_time": 20,
+                "end_phase_at_time": 120,
+                "points_per_click": 1,
+                "background": "yellow",
+                "text_color": "black",
+                "instructions_text": "Phase 2 Instructions",
+                "points_instructions": ""
+            }
+        },
+        {
+            "component": 3,
+            "startTime": 492.034,
+            "settings": {
+                "random_min_time": 10,
+                "random_max_time": 20,
+                "end_phase_at_time": 120,
+                "points_per_click": 1,
+                "background": "red",
+                "text_color": "white",
+                "instructions_text": "Phase 3 Instructions",
+                "points_instructions": "Click quickly for points!"
+            }
+        },
+        {
+            "component": 4,
+            "startTime": 615.055,
+            "settings": {
+                "random_min_time": 10,
+                "random_max_time": 20,
+                "end_phase_at_time": 120,
+                "points_per_click": 0,
+                "background": "yellow",
+                "text_color": "black",
+                "instructions_text": "Phase 4 Instructions",
+                "points_instructions": ""
+            }
+        },
+        {
+            "component": 3,
+            "startTime": 738.073,
+            "settings": {
+                "random_min_time": 10,
+                "random_max_time": 20,
+                "end_phase_at_time": 120,
+                "points_per_click": 1,
+                "background": "red",
+                "text_color": "white",
+                "instructions_text": "Phase 3 Instructions",
+                "points_instructions": "Click quickly for points!"
+            }
+        },
+        {
+            "component": 4,
+            "startTime": 861.078,
+            "settings": {
+                "random_min_time": 10,
+                "random_max_time": 20,
+                "end_phase_at_time": 120,
+                "points_per_click": 0,
+                "background": "yellow",
+                "text_color": "black",
+                "instructions_text": "Phase 4 Instructions",
+                "points_instructions": ""
+            }
+        }
+    ],
+    "clicks": [
+        {
+            "type": "mainSquare",
+            "time": 332.476,
+            "score": 0,
+            "interval": 12,
+            "component": 1
+        },
+        {
+            "type": "pointsSquare",
+            "time": 333.276,
+            "score": 1,
+            "component": 1
+        },
+        {
+            "type": "mainSquare",
+            "time": 349.342,
+            "score": 1,
+            "interval": 16,
+            "component": 1
+        }
+    ],
+    "finalScore": 1
+}

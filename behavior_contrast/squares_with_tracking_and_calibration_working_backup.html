@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eye Tracking Experiment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        
+        #container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #instructions {
+            max-width: 80%;
+            margin: 20px auto;
+            font-size: 24px;
+            line-height: 1.5;
+        }
+        
+        /* Webgazer styles */
+        #webgazerVideoContainer {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            width: 200px;
+            height: 150px;
+            z-index: 1000;
+            border: 2px solid white;
+            display: none;
+        }
+        
+        #webgazerVideoContainer video {
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Calibration styles */
+        .calibration-dot {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            z-index: 1001;
+            animation: pulse 1s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            from { transform: translate(-50%, -50%) scale(1); }
+            to { transform: translate(-50%, -50%) scale(1.5); }
+        }
+        
+        #calibration-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+        }
+        
+        #gazePositionIndicator {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(0, 255, 0, 0.5);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 999;
+            display: none;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="instructions">
+            <h2>Eye Tracking Setup</h2>
+            <p>We'll now set up the eye tracker. Please:</p>
+            <ol>
+                <li>Allow camera access when prompted</li>
+                <li>Keep your head still</li>
+                <li>Click on each red dot as it appears</li>
+            </ol>
+            <button id="startCalibration">Begin Calibration</button>
+        </div>
+    </div>
+
+    <!-- Webgazer elements -->
+    <div id="webgazerVideoContainer"></div>
+    <div id="calibration-screen" style="display:none;">
+        <h2>Eye Tracking Calibration</h2>
+        <p>Please click on each red dot as it appears</p>
+        <p>Keep your head still and look directly at each dot</p>
+    </div>
+    <div id="gazePositionIndicator"></div>
+
+    <!-- Load Webgazer from CDN -->
+    <script src="https://webgazer.cs.brown.edu/webgazer.js?"></script>
+    
+    <script>
+        // Initialize Webgazer with minimal settings
+        async function initWebgazer() {
+            try {
+                // Clear any existing data first
+                if (typeof webgazer !== 'undefined') {
+                    webgazer.clearData();
+                }
+                
+                // Set up Webgazer with minimal settings
+                webgazer.setRegression('ridge')
+                       .setGazeListener(function(data, elapsedTime) {
+                           if (data) {
+                               // Show gaze position
+                               const indicator = document.getElementById('gazePositionIndicator');
+                               indicator.style.display = 'block';
+                               indicator.style.left = `${data.x}px`;
+                               indicator.style.top = `${data.y}px`;
+                           }
+                       })
+                       .begin();
+                
+                // Hide video feed (showing it can slow things down)
+                document.getElementById('webgazerVideoContainer').style.display = 'none';
+                
+                return true;
+            } catch (error) {
+                console.error("Webgazer initialization failed:", error);
+                return false;
+            }
+        }
+
+        // Calibration function that stops collecting data afterward
+        async function calibrateWebgazer() {
+            return new Promise((resolve) => {
+                const calibrationScreen = document.getElementById('calibration-screen');
+                calibrationScreen.style.display = 'flex';
+                
+                // Clear any previous calibration data
+                webgazer.clearData();
+                
+                const points = [
+                    {x: 10, y: 10},   // Top-left
+                    {x: 90, y: 10},   // Top-right
+                    {x: 10, y: 90},   // Bottom-left
+                    {x: 90, y: 90},   // Bottom-right
+                    {x: 50, y: 50}    // Center
+                ];
+                
+                let currentPoint = 0;
+                
+                function showNextPoint() {
+                    // Clear any existing dots
+                    const existingDot = document.querySelector('.calibration-dot');
+                    if (existingDot) {
+                        existingDot.remove();
+                    }
+                    
+                    if (currentPoint >= points.length) {
+                        calibrationScreen.style.display = 'none';
+                        
+                        // Stop calibration process completely
+                        webgazer.pause();
+                        
+                        // Show completion message
+                        document.getElementById('instructions').innerHTML = `
+                            <h2>Calibration Complete</h2>
+                            <p>Eye tracking is now active.</p>
+                            <p>The green dot shows where we think you're looking.</p>
+                            <button id="restartCalibration">Recalibrate</button>
+                        `;
+                        
+                        document.getElementById('restartCalibration').addEventListener('click', () => {
+                            location.reload();
+                        });
+                        
+                        resolve();
+                        return;
+                    }
+                    
+                    const point = points[currentPoint];
+                    const dot = document.createElement('div');
+                    dot.className = 'calibration-dot';
+                    dot.style.left = `${point.x}%`;
+                    dot.style.top = `${point.y}%`;
+                    
+                    dot.addEventListener('click', () => {
+                        // Record just this calibration point
+                        const x = window.innerWidth * point.x / 100;
+                        const y = window.innerHeight * point.y / 100;
+                        webgazer.addMouseClick(x, y);
+                        
+                        currentPoint++;
+                        setTimeout(showNextPoint, 300);
+                    });
+                    
+                    document.body.appendChild(dot);
+                }
+                
+                showNextPoint();
+            });
+        }
+
+        // Start calibration when button is clicked
+        document.getElementById('startCalibration').addEventListener('click', async function() {
+            this.disabled = true;
+            this.textContent = "Initializing...";
+            
+            const initialized = await initWebgazer();
+            if (initialized) {
+                await calibrateWebgazer();
+            } else {
+                document.getElementById('instructions').innerHTML = `
+                    <h2 style="color:red;">Initialization Failed</h2>
+                    <p>Please refresh the page and try again.</p>
+                    <button onclick="location.reload()">Refresh</button>
+                `;
+            }
+        });
+
+        // Clean up when page is closed
+        window.addEventListener('beforeunload', function() {
+            if (typeof webgazer !== 'undefined') {
+                webgazer.end();
+            }
+        });
+    </script>
+</body>
+</html>

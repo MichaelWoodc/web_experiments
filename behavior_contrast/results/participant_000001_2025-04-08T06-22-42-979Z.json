@@ -1,0 +1,682 @@
+{
+    "participant": "000001",
+    "gender": "",
+    "age": "",
+    "race": "",
+    "ethnicity": "",
+    "comments": "",
+    "consentTimestamp": "2025-04-08T06:06:18.605Z",
+    "componentOrder": [
+        1,
+        2,
+        1,
+        2,
+        3,
+        4,
+        3,
+        4
+    ],
+    "phases": [
+        {
+            "component": 1,
+            "startTime": 0,
+            "settings": {
+                "random_min_time": 10,
+                "random_max_time": 20,
+                "end_phase_at_time": 120,
+                "points_per_click": 1,
+                "background": "green",
+                "text_color": "white",
+                "instructions_text": "Phase 1 Instructions",
+                "points_instructions": "Click the small square fast to earn points!"
+            }
+        },
+        {
+            "component": 2,
+            "startTime": 123.012,
+            "settings": {
+                "random_min_time": 10,
+                "random_max_time": 20,
+                "end_phase_at_time": 120,
+                "points_per_click": 1,
+                "background": "yellow",
+                "text_color": "black",
+                "instructions_text": "Phase 2 Instructions",
+                "points_instructions": ""
+            }
+        },
+        {
+            "component": 1,
+            "startTime": 246.03,
+            "settings": {
+                "random_min_time": 10,
+                "random_max_time": 20,
+                "end_phase_at_time": 120,
+                "points_per_click": 1,
+                "background": "green",
+                "text_color": "white",
+                "instructions_text": "Phase 1 Instructions",
+                "points_instructions": "Click the small square fast to earn points!"
+            }
+        },
+        {
+            "component": 2,
+            "startTime": 369.043,
+            "settings": {
+                "random_min_time": 10,
+                "random_max_time": 20,
+                "end_phase_at_time": 120,
+                "points_per_click": 1,
+                "background": "yellow",
+                "text_color": "black",
+                "instructions_text": "Phase 2 Instructions",
+                "points_instructions": ""
+            }
+        },
+        {
+            "component": 3,
+            "startTime": 492.047,
+            "settings": {
+                "random_min_time": 10,
+                "random_max_time": 20,
+                "end_phase_at_time": 120,
+                "points_per_click": 1,
+                "background": "red",
+                "text_color": "white",
+                "instructions_text": "Phase 3 Instructions",
+                "points_instructions": "Click quickly for points!"
+            }
+        },
+        {
+            "component": 4,
+            "startTime": 615.055,
+            "settings": {
+                "random_min_time": 10,
+                "random_max_time": 20,
+                "end_phase_at_time": 120,
+                "points_per_click": 0,
+                "background": "yellow",
+                "text_color": "black",
+                "instructions_text": "Phase 4 Instructions",
+                "points_instructions": ""
+            }
+        },
+        {
+            "component": 3,
+            "startTime": 738.063,
+            "settings": {
+                "random_min_time": 10,
+                "random_max_time": 20,
+                "end_phase_at_time": 120,
+                "points_per_click": 1,
+                "background": "red",
+                "text_color": "white",
+                "instructions_text": "Phase 3 Instructions",
+                "points_instructions": "Click quickly for points!"
+            }
+        },
+        {
+            "component": 4,
+            "startTime": 861.078,
+            "settings": {
+                "random_min_time": 10,
+                "random_max_time": 20,
+                "end_phase_at_time": 120,
+                "points_per_click": 0,
+                "background": "yellow",
+                "text_color": "black",
+                "instructions_text": "Phase 4 Instructions",
+                "points_instructions": ""
+            }
+        }
+    ],
+    "clicks": [
+        {
+            "type": "mainSquare",
+            "time": 0.568,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 0.568,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 0.968,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 0.968,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 1.156,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 1.156,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 1.303,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 1.303,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 1.446,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 1.446,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 1.714,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 1.714,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 2.24,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 2.24,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 3.306,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 3.306,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 4.048,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 4.048,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 4.762,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 4.762,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 5.95,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 5.95,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 6.102,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 6.102,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 6.392,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 6.392,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 6.751,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 6.751,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 7.1,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 7.1,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 7.782,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 7.782,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 8.323,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 8.323,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 8.736,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 8.736,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 9.204,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 9.204,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 9.366,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 9.366,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 9.506,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 9.506,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 9.646,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 9.646,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 9.99,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 9.99,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 10.162,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 10.162,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 10.326,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 10.326,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 10.468,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 10.468,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 10.626,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 10.626,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 10.768,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 10.768,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 10.908,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 10.908,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 11.046,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 11.046,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 11.182,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 11.182,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 11.346,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 11.346,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 12.111,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 12.111,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 12.836,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 12.836,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 13.656,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 13.656,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 14.418,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 14.418,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 15.018,
+            "score": 0,
+            "interval": 15,
+            "timeSinceSquareAppeared": 15.018,
+            "component": 1,
+            "valid": true
+        },
+        {
+            "type": "pointsSquare",
+            "time": 16.312,
+            "score": 1,
+            "component": 1
+        },
+        {
+            "type": "mainSquare",
+            "time": 16.784,
+            "score": 1,
+            "interval": 13,
+            "timeSinceSquareAppeared": 0.472,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 16.962,
+            "score": 1,
+            "interval": 13,
+            "timeSinceSquareAppeared": 0.65,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 17.096,
+            "score": 1,
+            "interval": 13,
+            "timeSinceSquareAppeared": 0.784,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 17.232,
+            "score": 1,
+            "interval": 13,
+            "timeSinceSquareAppeared": 0.92,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 17.364,
+            "score": 1,
+            "interval": 13,
+            "timeSinceSquareAppeared": 1.052,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 17.49,
+            "score": 1,
+            "interval": 13,
+            "timeSinceSquareAppeared": 1.178,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 255.579,
+            "score": 1,
+            "interval": 13,
+            "timeSinceSquareAppeared": 9.549,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 255.949,
+            "score": 1,
+            "interval": 13,
+            "timeSinceSquareAppeared": 9.919,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 256.099,
+            "score": 1,
+            "interval": 13,
+            "timeSinceSquareAppeared": 10.069,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 256.241,
+            "score": 1,
+            "interval": 13,
+            "timeSinceSquareAppeared": 10.211,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 256.359,
+            "score": 1,
+            "interval": 13,
+            "timeSinceSquareAppeared": 10.329,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 256.691,
+            "score": 1,
+            "interval": 13,
+            "timeSinceSquareAppeared": 10.661,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 256.827,
+            "score": 1,
+            "interval": 13,
+            "timeSinceSquareAppeared": 10.797,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 256.953,
+            "score": 1,
+            "interval": 13,
+            "timeSinceSquareAppeared": 10.923,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 257.041,
+            "score": 1,
+            "interval": 13,
+            "timeSinceSquareAppeared": 11.011,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 623.713,
+            "score": 1,
+            "interval": 11,
+            "timeSinceSquareAppeared": 8.658,
+            "component": 4,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 623.875,
+            "score": 1,
+            "interval": 11,
+            "timeSinceSquareAppeared": 8.82,
+            "component": 4,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 624.025,
+            "score": 1,
+            "interval": 11,
+            "timeSinceSquareAppeared": 8.97,
+            "component": 4,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 624.259,
+            "score": 1,
+            "interval": 11,
+            "timeSinceSquareAppeared": 9.204,
+            "component": 4,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 625.019,
+            "score": 1,
+            "interval": 11,
+            "timeSinceSquareAppeared": 9.964,
+            "component": 4,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 625.168,
+            "score": 1,
+            "interval": 11,
+            "timeSinceSquareAppeared": 10.113,
+            "component": 4,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 625.415,
+            "score": 1,
+            "interval": 11,
+            "timeSinceSquareAppeared": 10.36,
+            "component": 4,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 625.557,
+            "score": 1,
+            "interval": 11,
+            "timeSinceSquareAppeared": 10.502,
+            "component": 4,
+            "valid": false
+        }
+    ],
+    "finalScore": 1
+}

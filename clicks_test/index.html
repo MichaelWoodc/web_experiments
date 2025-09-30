@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Click Counter</title>
+  <style>
+    #counterDisplay {
+      display: none;
+      margin-top: 10px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <button id="clickBtn">Click Me!</button>
+  <button id="toggleViewBtn">Show Count</button>
+
+  <div id="counterDisplay">Clicks: 0</div>
+
+  <script>
+    const clickBtn = document.getElementById('clickBtn');
+    const toggleViewBtn = document.getElementById('toggleViewBtn');
+    const counterDisplay = document.getElementById('counterDisplay');
+    let intervalId = null;
+
+    clickBtn.addEventListener('click', () => {
+      fetch('count.php', { method: 'POST' })
+        .then(res => res.json())
+        .then(data => {
+          if (counterDisplay.style.display !== 'none') {
+            counterDisplay.textContent = 'Clicks: ' + data.count;
+          }
+        })
+        .catch(console.error);
+    });
+
+    toggleViewBtn.addEventListener('click', () => {
+      if (counterDisplay.style.display === 'none') {
+        counterDisplay.style.display = 'block';
+        toggleViewBtn.textContent = 'Hide Count';
+
+        // Start polling count every second
+        updateCount();
+        intervalId = setInterval(updateCount, 1000);
+      } else {
+        counterDisplay.style.display = 'none';
+        toggleViewBtn.textContent = 'Show Count';
+
+        // Stop polling
+        clearInterval(intervalId);
+        intervalId = null;
+      }
+    });
+
+    function updateCount() {
+      fetch('count.php')
+        .then(res => res.json())
+        .then(data => {
+          counterDisplay.textContent = 'Clicks: ' + data.count;
+        })
+        .catch(console.error);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Squares Experiment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        
+        #container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #instructions {
+            max-width: 80%;
+            margin: 20px auto;
+            font-size: 24px;
+            line-height: 1.5;
+            text-shadow: 
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+        }
+        
+        #mainSquare {
+            width: 250px;
+            height: 250px;
+            background-color: white;
+            margin: 20px auto;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        #pointsSquare {
+            width: 100px;
+            height: 100px;
+            background-color: white;
+            position: absolute;
+            right: 100px;
+            bottom: 100px;
+            cursor: pointer;
+            display: none;
+        }
+        
+        #scoreDisplay {
+            position: absolute;
+            left: 50px;
+            top: 50px;
+            font-size: 48px;
+            text-shadow: 
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+        }
+        
+        #infoText {
+            font-size: 20px;
+            margin: 20px auto;
+            max-width: 80%;
+            text-shadow: 
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+        }
+        
+        #consentForm {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 800px;
+            margin: 20px auto;
+            text-align: left;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: white;
+            text-shadow: 
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+        }
+        
+        select, input[type="text"], textarea {
+            width: 100%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            text-shadow: 
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+            margin: 5px;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        .consent-text {
+            background-color: #444;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="consentForm">
+            <h2>Experiment Consent Form</h2>
+            
+            <div class="consent-text">
+                <h3>Title of Research Study:</h3>
+                <p>Behavioral Response Patterns in Interactive Tasks</p>
+                
+                <h3>Investigator:</h3>
+                <p>[Researcher's Name], [Institution]</p>
+                
+                <h3>Purpose of the Research:</h3>
+                <p>This study aims to examine how individuals respond to different visual stimuli and timing constraints in an interactive computer-based task.</p>
+                
+                <h3>Procedures:</h3>
+                <p>You will be asked to interact with squares that appear on the screen according to the instructions provided. The session will last approximately 15-20 minutes.</p>
+                
+                <h3>Potential Risks and Discomforts:</h3>
+                <p>There are no anticipated risks beyond normal computer use. You may experience minor eye strain or fatigue.</p>
+                
+                <h3>Potential Benefits:</h3>
+                <p>This research may contribute to our understanding of human-computer interaction patterns.</p>
+                
+                <h3>Confidentiality:</h3>
+                <p>Your participation is anonymous. Data will be stored securely and only reported in aggregate form.</p>
+                
+                <h3>Voluntary Participation:</h3>
+                <p>Your participation is voluntary. You may withdraw at any time without penalty.</p>
+                
+                <h3>Questions:</h3>
+                <p>If you have questions, contact [Researcher's Email]. For concerns about your rights as a participant, contact [IRB Contact Information].</p>
+            </div>
+            
+            <div class="form-group">
+                <label for="participantID">Participant ID:</label>
+                <input type="text" id="participantID">
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="gender">Gender:</label>
+                    <select id="gender">
+                        <option value="">Select...</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Non-binary">Non-binary</option>
+                        <option value="Prefer not to say">Prefer not to say</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="age">Age:</label>
+                    <select id="age">
+                        <option value="">Select...</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                        <option value="25">25</option>
+                        <option value="26+">26+</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="race">Race:</label>
+                    <select id="race">
+                        <option value="">Select...</option>
+                        <option value="American Indian or Alaska Native">American Indian or Alaska Native</option>
+                        <option value="Asian">Asian</option>
+                        <option value="Black or African American">Black or African American</option>
+                        <option value="Native Hawaiian or Pacific Islander">Native Hawaiian or Pacific Islander</option>
+                        <option value="White">White</option>
+                        <option value="Prefer not to say">Prefer not to say</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ethnicity">Ethnicity:</label>
+                    <select id="ethnicity">
+                        <option value="">Select...</option>
+                        <option value="Hispanic or Latino">Hispanic or Latino</option>
+                        <option value="Not Hispanic or Latino">Not Hispanic or Latino</option>
+                        <option value="Prefer not to say">Prefer not to say</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="consentCheckbox"> I have read and understood the information above and voluntarily agree to participate in this study*
+                </label>
+            </div>
+            
+            <div class="form-group">
+                <label for="comments">Any comments or questions?</label>
+                <textarea id="comments" rows="3"></textarea>
+            </div>
+            
+            <button id="startExperiment">Start Experiment</button>
+        </div>
+        
+        <div id="instructions" style="display: none;"></div>
+        <div id="mainSquare" style="display: none;"></div>
+        <div id="pointsSquare"></div>
+        <div id="scoreDisplay" style="display: none;">0</div>
+        <div id="infoText" style="display: none;"></div>
+        <div id="pointsInstructions" style="display: none;"></div>
+    </div>
+
+    <script>
+        // Fixed component order
+        const componentOrder = [1, 2, 1, 2, 3, 4, 3, 4];
+
+        // Component definitions with text color and points square instructions
+        const components = {
+            1: {
+                random_min_time: 10,
+                random_max_time: 20,
+                end_phase_at_time: 120,
+                points_per_click: 1,
+                background: "green",
+                text_color: "white",
+                instructions_text: "Phase 1 Instructions",
+                points_instructions: "Click the small square fast to earn points!"
+            },
+            2: {
+                random_min_time: 10,
+                random_max_time: 20,
+                end_phase_at_time: 120,
+                points_per_click: 1,
+                background: "yellow",
+                text_color: "black",
+                instructions_text: "Phase 2 Instructions",
+                points_instructions: ""
+            },
+            3: {
+                random_min_time: 10,
+                random_max_time: 20,
+                end_phase_at_time: 120,
+                points_per_click: 1,
+                background: "red",
+                text_color: "white",
+                instructions_text: "Phase 3 Instructions",
+                points_instructions: "Click quickly for points!"
+            },
+            4: {
+                random_min_time: 10,
+                random_max_time: 20,
+                end_phase_at_time: 120,
+                points_per_click: 0,
+                background: "yellow",
+                text_color: "black",
+                instructions_text: "Phase 4 Instructions",
+                points_instructions: ""
+            }
+        };
+
+        // Experiment variables
+        let score = 0;
+        let currentComponent = null;
+        let currentInterval = 0;
+        let pointsSquareTimeout = null;
+        let experimentStartTime = 0;
+        let phaseStartTime = 0;
+        let currentComponentIndex = 0;
+        let lastValidClickTime = 0;
+        let squareAppearTime = 0;
+        let phaseTimer = null;
+        
+        // DOM elements
+        const consentForm = document.getElementById('consentForm');
+        const instructions = document.getElementById('instructions');
+        const mainSquare = document.getElementById('mainSquare');
+        const pointsSquare = document.getElementById('pointsSquare');
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const infoText = document.getElementById('infoText');
+        const pointsInstructions = document.getElementById('pointsInstructions');
+        const startButton = document.getElementById('startExperiment');
+        const container = document.getElementById('container');
+        const participantIDInput = document.getElementById('participantID');
+        
+        // Experiment data
+        let experimentData = {
+            participant: '',
+            gender: '',
+            age: '',
+            race: '',
+            ethnicity: '',
+            comments: '',
+            consentTimestamp: '',
+            componentOrder: [...componentOrder],
+            phases: [],
+            clicks: [],
+            finalScore: 0
+        };
+        
+        // Function to get the next participant ID
+        async function getNextParticipantID() {
+            try {
+                const response = await fetch('results/');
+                if (!response.ok) {
+                    throw new Error('Could not read results directory');
+                }
+                
+                const html = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const links = doc.querySelectorAll('a');
+                
+                let maxID = 0;
+                links.forEach(link => {
+                    const match = link.href.match(/participant_(\d+)_/);
+                    if (match) {
+                        const id = parseInt(match[1]);
+                        if (id > maxID) maxID = id;
+                    }
+                });
+                
+                return (maxID + 1).toString().padStart(6, '0');
+            } catch (error) {
+                console.error('Error getting next participant ID:', error);
+                return '000001'; // Default starting ID
+            }
+        }
+        
+        // Initialize participant ID when page loads
+        window.addEventListener('DOMContentLoaded', async () => {
+            const nextID = await getNextParticipantID();
+            participantIDInput.value = nextID;
+        });
+
+        // Generate a new random interval for current component
+        function getNewInterval() {
+            const comp = currentComponent;
+            const newInterval = Math.floor(
+                Math.random() * (comp.random_max_time - comp.random_min_time + 1)
+            ) + comp.random_min_time;
+            
+            console.log('New interval set to:', newInterval, 'seconds');
+            return newInterval;
+        }
+        
+        // Hide points square and show main square
+        function returnToMainSquare() {
+            clearTimeout(pointsSquareTimeout);
+            pointsSquare.style.display = 'none';
+            pointsSquare.onclick = null;
+            pointsInstructions.style.display = 'none';
+            mainSquare.style.display = 'block';
+            scoreDisplay.style.display = 'block';
+            
+            // Set text color for this component
+            document.querySelectorAll('#instructions, #infoText, #scoreDisplay, #pointsInstructions').forEach(el => {
+                el.style.color = currentComponent.text_color;
+            });
+            
+            // Track when square appears for interval timing
+            squareAppearTime = Date.now();
+            currentInterval = getNewInterval();
+            
+            // Update info text if component has instructions
+            if (currentComponent.instructions_text) {
+                infoText.style.display = 'block';
+                infoText.textContent = currentComponent.instructions_text;
+            } else {
+                infoText.style.display = 'none';
+            }
+        }
+        
+        // Transition between components (3 second black screen)
+        function transitionToNextComponent() {
+            // Clear any existing timers
+            clearTimeout(pointsSquareTimeout);
+            clearTimeout(phaseTimer);
+            
+            // Hide everything
+            mainSquare.style.display = 'none';
+            pointsSquare.style.display = 'none';
+            scoreDisplay.style.display = 'none';
+            infoText.style.display = 'none';
+            pointsInstructions.style.display = 'none';
+            container.style.backgroundColor = 'black';
+            
+            // Reset text to default white
+            document.querySelectorAll('#instructions, #infoText, #scoreDisplay, #pointsInstructions').forEach(el => {
+                el.style.color = 'white';
+            });
+            
+            // Check if there are more components
+            if (currentComponentIndex < componentOrder.length) {
+                setTimeout(startComponent, 3000);
+            } else {
+                endExperiment();
+            }
+        }
+        
+        // Start a new component
+        function startComponent() {
+            currentComponent = components[componentOrder[currentComponentIndex]];
+            currentComponentIndex++;
+            
+            // Reset timing for new component
+            lastValidClickTime = 0;
+            squareAppearTime = Date.now();
+            currentInterval = getNewInterval();
+            
+            // Record phase start
+            phaseStartTime = Date.now();
+            experimentData.phases.push({
+                component: componentOrder[currentComponentIndex - 1],
+                startTime: (phaseStartTime - experimentStartTime) / 1000,
+                settings: {...currentComponent}
+            });
+            
+            // Set phase timer to end at correct time
+            phaseTimer = setTimeout(() => {
+                transitionToNextComponent();
+            }, currentComponent.end_phase_at_time * 1000);
+            
+            // Set background and text color
+            container.style.backgroundColor = currentComponent.background;
+            document.querySelectorAll('#instructions, #infoText, #scoreDisplay, #pointsInstructions').forEach(el => {
+                el.style.color = currentComponent.text_color;
+            });
+            
+            // Initialize component
+            mainSquare.style.display = 'block';
+            scoreDisplay.style.display = 'block';
+            
+            // Set info text if component has instructions
+            if (currentComponent.instructions_text) {
+                infoText.style.display = 'block';
+                infoText.textContent = currentComponent.instructions_text;
+            }
+        }
+        
+        // Main square click handler
+        function handleMainSquareClick() {
+            const currentTime = Date.now();
+            const timeSinceSquareAppeared = (currentTime - squareAppearTime) / 1000;
+            
+            // Log EVERY click, regardless of validity
+            experimentData.clicks.push({
+                type: 'mainSquare',
+                time: (currentTime - experimentStartTime) / 1000,
+                score: score,
+                interval: currentInterval,
+                timeSinceSquareAppeared: timeSinceSquareAppeared,
+                component: componentOrder[currentComponentIndex - 1],
+                valid: timeSinceSquareAppeared >= currentInterval
+            });
+            
+            // Only accept click if enough time has passed since square appeared
+            if (timeSinceSquareAppeared >= currentInterval) {
+                // Valid click - process it
+                lastValidClickTime = currentTime;
+                
+                // Show points square
+                mainSquare.style.display = 'none';
+                pointsSquare.style.display = 'block';
+                
+                // Show points instructions if they exist
+                if (currentComponent.points_instructions) {
+                    pointsInstructions.style.display = 'block';
+                    pointsInstructions.textContent = currentComponent.points_instructions;
+                } else {
+                    pointsInstructions.style.display = 'none';
+                }
+                
+                // Set timeout to hide points square after 3 seconds
+                pointsSquareTimeout = setTimeout(() => {
+                    returnToMainSquare();
+                }, 3000);
+                
+                // Points square click handler
+                pointsSquare.onclick = function() {
+                    const clickTime = Date.now();
+                    score += currentComponent.points_per_click;
+                    scoreDisplay.textContent = score;
+                    
+                    // Record the click
+                    experimentData.clicks.push({
+                        type: 'pointsSquare',
+                        time: (clickTime - experimentStartTime) / 1000,
+                        score: score,
+                        component: componentOrder[currentComponentIndex - 1]
+                    });
+                    
+                    // Immediately hide points square when clicked
+                    clearTimeout(pointsSquareTimeout);
+                    returnToMainSquare();
+                };
+            } else {
+                const waitTime = (currentInterval - timeSinceSquareAppeared).toFixed(1);
+                console.log(`Too soon! Wait ${waitTime} more seconds`);
+                
+                // Visual feedback
+                mainSquare.style.backgroundColor = 'red';
+                setTimeout(() => {
+                    mainSquare.style.backgroundColor = 'white';
+                }, 300);
+            }
+        }
+
+        // Start experiment when button is clicked
+        startButton.addEventListener('click', function() {
+            if (!document.getElementById('consentCheckbox').checked) {
+                alert('You must consent to participate in the experiment');
+                return;
+            }
+            
+            // Record participant info
+            experimentData.participant = participantIDInput.value;
+            experimentData.gender = document.getElementById('gender').value;
+            experimentData.age = document.getElementById('age').value;
+            experimentData.race = document.getElementById('race').value;
+            experimentData.ethnicity = document.getElementById('ethnicity').value;
+            experimentData.comments = document.getElementById('comments').value;
+            experimentData.consentTimestamp = new Date().toISOString();
+            
+            // Hide consent form and show instructions
+            consentForm.style.display = 'none';
+            instructions.style.display = 'block';
+            instructions.innerHTML = `
+                <h2>Instructions</h2>
+                <p>Only click the big white square one time every 15 seconds. Just wait 15 seconds between clicking it.</p>
+                <p>When the other square comes up, click on it fast until it disappears.</p>
+                <p>Press any key to begin.</p>
+            `;
+            
+            // Start the experiment after any key press
+            document.addEventListener('keydown', function startHandler() {
+                document.removeEventListener('keydown', startHandler);
+                instructions.style.display = 'none';
+                
+                // Set up main square click handler
+                mainSquare.onclick = handleMainSquareClick;
+                
+                // Start experiment
+                experimentStartTime = Date.now();
+                startComponent();
+            }, {once: true});
+        });
+        
+        // End experiment function
+        function endExperiment() {
+            // Remove event listeners
+            mainSquare.onclick = null;
+            pointsSquare.onclick = null;
+            
+            // Hide experiment elements
+            mainSquare.style.display = 'none';
+            pointsSquare.style.display = 'none';
+            scoreDisplay.style.display = 'none';
+            pointsInstructions.style.display = 'none';
+            
+            // Show completion message
+            infoText.style.display = 'block';
+            infoText.innerHTML = `
+                <h1>Experiment Complete</h1>
+                <p>Your final score: ${score}</p>
+                <p>Thank you for participating!</p>
+                <div id="saveStatus">Preparing data...</div>
+            `;
+            
+            // Save final score
+            experimentData.finalScore = score;
+            
+            // Save data to server
+            saveDataToServer();
+        }
+        
+        function saveDataToServer() {
+            const saveStatus = document.getElementById('saveStatus');
+            saveStatus.textContent = "Saving data...";
+            
+            // Generate a unique filename with timestamp
+            const now = new Date();
+            const timestamp = now.toISOString().replace(/[:.]/g, '-');
+            const filename = `participant_${experimentData.participant}_${timestamp}.json`;
+            
+            fetch('save_data.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    filename: filename,
+                    data: experimentData
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    saveStatus.innerHTML = `
+                        <p>Data saved successfully!</p>
+                        <p>Your data file: ${filename}</p>
+                    `;
+                } else {
+                    saveStatus.innerHTML = `
+                        <p>Error saving data: ${data.message}</p>
+                        <button onclick="downloadBackupData()">Download Backup Data</button>
+                    `;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                saveStatus.innerHTML = `
+                    <p>Error saving data: ${error.message}</p>
+                    <button onclick="downloadBackupData()">Download Backup Data</button>
+                `;
+            });
+        }
+
+        function downloadBackupData() {
+            const now = new Date();
+            const timestamp = now.toISOString().replace(/[:.]/g, '-');
+            const dataStr = JSON.stringify(experimentData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const dataUrl = URL.createObjectURL(dataBlob);
+            
+            const downloadLink = document.createElement('a');
+            downloadLink.href = dataUrl;
+            downloadLink.download = `experiment_backup_${experimentData.participant}_${timestamp}.json`;
+            downloadLink.click();
+        }
+    </script>
+</body>
+</html>

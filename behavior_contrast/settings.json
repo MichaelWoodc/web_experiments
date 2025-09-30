@@ -1,0 +1,45 @@
+{
+    "componentOrder": [1, 2, 3],
+    "components": {
+        "1": {
+            "random_min_time": 10,
+            "random_max_time": 20,
+            "end_phase_at_time": 50,
+            "points_per_click": 1,
+            "background": "green",
+            "text_color": "white",
+            "instructions_text": "Phase 1 Instructions",
+            "points_instructions": "Click the small square fast to earn points!"
+        },
+        "2": {
+            "random_min_time": 10,
+            "random_max_time": 20,
+            "end_phase_at_time": 50,
+            "points_per_click": 1,
+            "background": "yellow",
+            "text_color": "black",
+            "instructions_text": "Phase 2 Instructions",
+            "points_instructions": ""
+        },
+        "3": {
+            "random_min_time": 10,
+            "random_max_time": 20,
+            "end_phase_at_time": 120,
+            "points_per_click": 1,
+            "background": "red",
+            "text_color": "white",
+            "instructions_text": "Phase 3 Instructions",
+            "points_instructions": "Click quickly for points!"
+        },
+        "4": {
+            "random_min_time": 10,
+            "random_max_time": 20,
+            "end_phase_at_time": 120,
+            "points_per_click": 0,
+            "background": "yellow",
+            "text_color": "black",
+            "instructions_text": "Phase 4 Instructions",
+            "points_instructions": ""
+        }
+    }
+}

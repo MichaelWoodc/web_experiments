@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Squares Experiment with Eye Tracking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        
+        #container {
+            position: center;
+            max-height: 1000px;
+            height: 100vh;
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #instructions {
+            max-width: 80%;
+            margin: 20px auto;
+            font-size: 24px;
+            line-height: 1.5;
+            text-shadow: 
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+        }
+        
+        #mainSquare {
+            width: 250px;
+            height: 250px;
+            background-color: white;
+            margin: 20px auto;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        #pointsSquare {
+            width: 100px;
+            height: 100px;
+            background-color: white;
+            position: absolute;
+            right: 100px;
+            bottom: 100px;
+            cursor: pointer;
+            display: none;
+        }
+        
+        #scoreDisplay {
+            position: absolute;
+            left: 250px;
+            top: 50px;
+            font-size: 48px;
+            text-shadow: 
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+        }
+        
+        #infoText {
+            font-size: 20px;
+            margin: 20px auto;
+            max-width: 80%;
+            text-shadow: 
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+        }
+        
+        #consentForm {
+            background-color: #333;
+            padding: 10px 50px 5px 50px;
+            border-radius: 10px;
+            max-width: 1800px;
+            text-align: left;
+            overflow-y: auto;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: white;
+            text-shadow: 
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+        }
+        
+        select, input[type="text"], textarea {
+            width: 100%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            text-shadow: 
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+            margin: 5px;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        .consent-text {
+            background-color: #444;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        /* Webgazer styles */
+        #webgazerVideoContainer {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            width: 200px;
+            height: 150px;
+            z-index: 1000;
+            border: 2px solid white;
+            display: none;
+        }
+        
+        #webgazerVideoContainer video {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .calibration-dot {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        #gazeDot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(255, 0, 0, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="consentForm">
+            <h2>Experiment Consent Form</h2>
+            
+            <div class="consent-text">
+                <h3>Title of Research Study:</h3>
+                <p>A Study on Behavior Contrast in College Students with Eye Tracking</p>
+                
+                <h3>Investigator(s):</h3>
+                <p>Cameron Long, Georgia Southern University</p>
+                <p>Kalya Randall, Georgia Southern</p>
+                <p>[Researcher's Name], [Institution]</p>
+
+                <h3>Purpose of the Research:</h3>
+                <p>The purpose of this study is to see how rates of button pressing on a computer screen changes during simple context changes while tracking eye movements.</p>
+                
+                <h3>Procedures:</h3>
+                <p>You will be asked to interact with squares that appear on the screen according to the instructions provided. The session will last approximately 32 minutes. We will also use your webcam to track your eye movements during the task.</p>
+                
+                <h3>Potential Risks and Discomforts:</h3>
+                <p>There are no anticipated risks beyond normal computer use. You may experience minor eye strain or fatigue. The eye tracking will use your webcam but will not record or store any video.</p>
+                
+                <h3>Potential Benefits:</h3>
+                <p>This research may contribute to our understanding of human-computer-task interaction patterns.</p>
+                
+                <h3>Confidentiality:</h3>
+                <p>Your participation is anonymous. Data will be stored securely and only reported in aggregate form. No video recordings will be stored.</p>
+                
+                <h3>Voluntary Participation:</h3>
+                <p>Your participation is voluntary. You may withdraw at any time without penalty.</p>
+                
+                <h3>Questions:</h3>
+                <p>If you have questions, contact [Researcher's Email]. For concerns about your rights as a participant, contact [IRB Contact Information].</p>
+            </div>
+            
+            <div class="form-group">
+                <label for="participantID">Participant ID:</label>
+                <input type="text" id="participantID" readonly>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="gender">Gender:</label>
+                    <select id="gender">
+                        <option value="">Select...</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Non-binary">Non-binary</option>
+                        <option value="Prefer not to say">Prefer not to say</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="age">Age:</label>
+                    <select id="age">
+                        <option value="">Select...</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                        <option value="25">25</option>
+                        <option value="26+">26+</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="race">Race:</label>
+                    <select id="race">
+                        <option value="">Select...</option>
+                        <option value="American Indian or Alaska Native">American Indian or Alaska Native</option>
+                        <option value="Asian">Asian</option>
+                        <option value="Black or African American">Black or African American</option>
+                        <option value="Native Hawaiian or Pacific Islander">Native Hawaiian or Pacific Islander</option>
+                        <option value="White">White</option>
+                        <option value="Prefer not to say">Prefer not to say</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ethnicity">Ethnicity:</label>
+                    <select id="ethnicity">
+                        <option value="">Select...</option>
+                        <option value="Hispanic or Latino">Hispanic or Latino</option>
+                        <option value="Not Hispanic or Latino">Not Hispanic or Latino</option>
+                        <option value="Prefer not to say">Prefer not to say</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="consentCheckbox"> I have read and understood the information above and voluntarily agree to participate in this study*
+                </label>
+            </div>
+            
+            <div class="form-group">
+                <label for="comments">Any comments or questions?</label>
+                <textarea id="comments" rows="3"></textarea>
+            </div>
+
+            <button id="toggleGazeDot">Show Gaze Dot</button>
+            <button id="startExperiment">Start Experiment</button>
+        </div>
+        
+        <div id="instructions" style="display: none;"></div>
+        <div id="mainSquare" style="display: none;"></div>
+        <div id="pointsSquare"></div>
+        <div id="scoreDisplay" style="display: none;">0</div>
+        <div id="infoText" style="display: none;"></div>
+        <div id="gazeDot"></div>
+    </div>
+
+    <!-- Webgazer video container -->
+    <div id="webgazerVideoContainer"></div>
+
+    <!-- Load Webgazer -->
+    <script src="https://webgazer.cs.brown.edu/webgazer.js?"></script>
+    
+    <!-- Main experiment script -->
+    <script>
+        // Experiment settings loaded from external JSON
+        let experimentSettings = {
+            componentOrder: [1, 2, 3],
+            components: {
+                1: {
+                    random_min_time: 10,
+                    random_max_time: 20,
+                    end_phase_at_time: 50,
+                    points_per_click: 1,
+                    background: "green",
+                    text_color: "white",
+                    instructions_text: "Phase 1 Instructions",
+                    points_instructions: "Click the small square fast to earn points!"
+                },
+                2: {
+                    random_min_time: 10,
+                    random_max_time: 20,
+                    end_phase_at_time: 50,
+                    points_per_click: 1,
+                    background: "yellow",
+                    text_color: "black",
+                    instructions_text: "Phase 2 Instructions",
+                    points_instructions: ""
+                },
+                3: {
+                    random_min_time: 10,
+                    random_max_time: 20,
+                    end_phase_at_time: 120,
+                    points_per_click: 1,
+                    background: "red",
+                    text_color: "white",
+                    instructions_text: "Phase 3 Instructions",
+                    points_instructions: "Click quickly for points!"
+                },
+                4: {
+                    random_min_time: 10,
+                    random_max_time: 20,
+                    end_phase_at_time: 120,
+                    points_per_click: 0,
+                    background: "yellow",
+                    text_color: "black",
+                    instructions_text: "Phase 4 Instructions",
+                    points_instructions: ""
+                }
+            }
+        };
+
+        // Experiment variables
+        let score = 0;
+        let currentComponent = null;
+        let currentInterval = 0;
+        let pointsSquareTimeout = null;
+        let experimentStartTime = 0;
+        let phaseStartTime = 0;
+        let currentComponentIndex = 0;
+        let lastValidClickTime = 0;
+        let squareAppearTime = 0;
+        let phaseTimer = null;
+        let gazeData = [];
+        let showGazeDot = false;
+        
+        // DOM elements
+        const consentForm = document.getElementById('consentForm');
+        const instructions = document.getElementById('instructions');
+        const mainSquare = document.getElementById('mainSquare');
+        const pointsSquare = document.getElementById('pointsSquare');
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const infoText = document.getElementById('infoText');
+        const startButton = document.getElementById('startExperiment');
+        const toggleGazeButton = document.getElementById('toggleGazeDot');
+        const participantIDInput = document.getElementById('participantID');
+        const webgazerContainer = document.getElementById('webgazerVideoContainer');
+        const gazeDot = document.getElementById('gazeDot');
+        
+        // Experiment data
+        let experimentData = {
+            participant: '',
+            gender: '',
+            age: '',
+            race: '',
+            ethnicity: '',
+            comments: '',
+            consentTimestamp: '',
+            componentOrder: [...experimentSettings.componentOrder],
+            phases: [],
+            clicks: [],
+            gazeData: [],
+            finalScore: 0
+        };
+
+        // Generate random 6-digit participant ID
+        function generateParticipantID() {
+            return Math.floor(100000 + Math.random() * 900000).toString();
+        }
+
+        // Toggle gaze dot visibility
+        function toggleGazeDot() {
+            showGazeDot = !showGazeDot;
+            gazeDot.style.display = showGazeDot ? 'block' : 'none';
+            toggleGazeButton.textContent = showGazeDot ? 'Hide Gaze Dot' : 'Show Gaze Dot';
+            return showGazeDot;
+        }
+
+        // Initialize Webgazer with proper error handling
+        async function initWebgazer() {
+            return new Promise(async (resolve, reject) => {
+                try {
+                    // Initialize Webgazer with proper method chaining
+                    await webgazer.setRegression('ridge')
+                        .setGazeListener(function(data, elapsedTime) {
+                            if (data && showGazeDot) {
+                                gazeDot.style.left = data.x + 'px';
+                                gazeDot.style.top = data.y + 'px';
+                                gazeData.push({
+                                    x: data.x,
+                                    y: data.y,
+                                    time: elapsedTime,
+                                    timestamp: Date.now() - experimentStartTime,
+                                    component: currentComponent ? experimentSettings.componentOrder[currentComponentIndex - 1] : null
+                                });
+                            }
+                        }).begin();
+                    
+                    // Show video and prediction points separately
+                    webgazer.showVideoPreview(true);
+                    webgazer.showPredictionPoints(true);
+                    
+                    // Set canvas attribute to prevent warning
+                    const canvas = document.querySelector('canvas');
+                    if (canvas) {
+                        canvas.willReadFrequently = true;
+                    }
+                    
+                    // Move video preview to our container
+                    const video = document.querySelector('video');
+                    if (video) {
+                        webgazerContainer.appendChild(video);
+                        webgazerContainer.style.display = 'block';
+                    }
+                    
+                    setTimeout(resolve, 1000);
+                } catch (error) {
+                    console.error("Webgazer initialization error:", error);
+                    reject(error);
+                }
+            });
+        }
+
+        // Calibration function with visual feedback
+        async function calibrateWebgazer() {
+            return new Promise((resolve) => {
+                const points = [
+                    {x: 10, y: 10}, 
+                    {x: 90, y: 10},
+                    {x: 90, y: 90},
+                    {x: 10, y: 90},
+                    {x: 50, y: 50}
+                ];
+                let currentPoint = 0;
+                
+                function showNextPoint() {
+                    if (currentPoint >= points.length) {
+                        resolve();
+                        return;
+                    }
+                    
+                    const point = points[currentPoint];
+                    const dot = document.createElement('div');
+                    dot.className = 'calibration-dot';
+                    dot.style.left = `${point.x}%`;
+                    dot.style.top = `${point.y}%`;
+                    
+                    dot.addEventListener('click', () => {
+                        document.body.removeChild(dot);
+                        currentPoint++;
+                        setTimeout(showNextPoint, 500);
+                    });
+                    
+                    document.body.appendChild(dot);
+                }
+                
+                showNextPoint();
+            });
+        }
+
+        // Generate a new random interval for current component
+        function getNewInterval() {
+            const comp = currentComponent;
+            return Math.floor(
+                Math.random() * (comp.random_max_time - comp.random_min_time + 1)
+            ) + comp.random_min_time;
+        }
+        
+        // Hide points square and show main square
+        function returnToMainSquare() {
+            clearTimeout(pointsSquareTimeout);
+            pointsSquare.style.display = 'none';
+            pointsSquare.onclick = null;
+            mainSquare.style.display = 'block';
+            scoreDisplay.style.display = 'block';
+            
+            document.querySelectorAll('#instructions, #infoText, #scoreDisplay').forEach(el => {
+                el.style.color = currentComponent.text_color;
+            });
+            
+            squareAppearTime = Date.now();
+            currentInterval = getNewInterval();
+            
+            if (currentComponent.instructions_text) {
+                infoText.style.display = 'block';
+                infoText.textContent = currentComponent.instructions_text;
+            } else {
+                infoText.style.display = 'none';
+            }
+        }
+        
+        // Transition between components
+        function transitionToNextComponent() {
+            clearTimeout(pointsSquareTimeout);
+            clearTimeout(phaseTimer);
+            
+            mainSquare.style.display = 'none';
+            pointsSquare.style.display = 'none';
+            scoreDisplay.style.display = 'none';
+            infoText.style.display = 'none';
+            document.body.style.backgroundColor = 'black';
+            
+            document.querySelectorAll('#instructions, #infoText, #scoreDisplay').forEach(el => {
+                el.style.color = 'white';
+            });
+            
+            if (currentComponentIndex < experimentSettings.componentOrder.length) {
+                setTimeout(startComponent, 3000);
+            } else {
+                endExperiment();
+            }
+        }
+        
+        // Start a new component
+        function startComponent() {
+            currentComponent = experimentSettings.components[experimentSettings.componentOrder[currentComponentIndex]];
+            currentComponentIndex++;
+            
+            lastValidClickTime = 0;
+            squareAppearTime = Date.now();
+            currentInterval = getNewInterval();
+            
+            phaseStartTime = Date.now();
+            experimentData.phases.push({
+                component: experimentSettings.componentOrder[currentComponentIndex - 1],
+                startTime: (phaseStartTime - experimentStartTime) / 1000,
+                settings: {...currentComponent}
+            });
+            
+            phaseTimer = setTimeout(() => {
+                transitionToNextComponent();
+            }, currentComponent.end_phase_at_time * 1000);
+            
+            document.body.style.backgroundColor = currentComponent.background;
+            document.querySelectorAll('#instructions, #infoText, #scoreDisplay').forEach(el => {
+                el.style.color = currentComponent.text_color;
+            });
+            
+            mainSquare.style.display = 'block';
+            scoreDisplay.style.display = 'block';
+            
+            if (currentComponent.instructions_text) {
+                infoText.style.display = 'block';
+                infoText.textContent = currentComponent.instructions_text;
+            }
+        }
+        
+        // Main square click handler
+        function handleMainSquareClick() {
+            const currentTime = Date.now();
+            const timeSinceSquareAppeared = (currentTime - squareAppearTime) / 1000;
+            
+            experimentData.clicks.push({
+                type: 'mainSquare',
+                time: (currentTime - experimentStartTime) / 1000,
+                score: score,
+                interval: currentInterval,
+                timeSinceSquareAppeared: timeSinceSquareAppeared,
+                component: experimentSettings.componentOrder[currentComponentIndex - 1],
+                valid: timeSinceSquareAppeared >= currentInterval
+            });
+            
+            if (timeSinceSquareAppeared >= currentInterval) {
+                lastValidClickTime = currentTime;
+                
+                mainSquare.style.display = 'none';
+                pointsSquare.style.display = 'block';
+                
+                pointsSquareTimeout = setTimeout(() => {
+                    returnToMainSquare();
+                }, 3000);
+                
+                pointsSquare.onclick = function() {
+                    const clickTime = Date.now();
+                    score += currentComponent.points_per_click;
+                    scoreDisplay.textContent = score;
+                    
+                    experimentData.clicks.push({
+                        type: 'pointsSquare',
+                        time: (clickTime - experimentStartTime) / 1000,
+                        score: score,
+                        component: experimentSettings.componentOrder[currentComponentIndex - 1]
+                    });
+                    
+                    clearTimeout(pointsSquareTimeout);
+                    returnToMainSquare();
+                };
+            } else {
+                const waitTime = (currentInterval - timeSinceSquareAppeared).toFixed(1);
+                console.log(`Too soon! Wait ${waitTime} more seconds`);
+                
+                mainSquare.style.backgroundColor = 'red';
+                setTimeout(() => {
+                    mainSquare.style.backgroundColor = 'white';
+                }, 300);
+            }
+        }
+
+        // End experiment function
+        function endExperiment() {
+            if (typeof webgazer !== 'undefined') {
+                webgazer.end();
+                webgazerContainer.style.display = 'none';
+            }
+            
+            mainSquare.onclick = null;
+            pointsSquare.onclick = null;
+            
+            // Add remaining gaze data
+            if (gazeData.length > 0) {
+                experimentData.gazeData = experimentData.gazeData.concat(gazeData);
+            }
+            
+            experimentData.finalScore = score;
+            
+            mainSquare.style.display = 'none';
+            pointsSquare.style.display = 'none';
+            scoreDisplay.style.display = 'none';
+            
+            infoText.style.display = 'block';
+            infoText.innerHTML = `
+                <h1>Experiment Complete</h1>
+                <p>Your final score: ${score}</p>
+                <p>Thank you for participating!</p>
+                <div id="saveStatus">Preparing data...</div>
+                <div id="downloadButtons" style="margin-top: 20px;">
+                    <button onclick="downloadDataAsJSON()">Download Data as JSON</button>
+                    <button onclick="downloadDataAsCSV()">Download Data as CSV</button>
+                </div>
+            `;
+            
+            saveDataLocally(experimentData);
+        }
+
+        // Save data locally as fallback
+        function saveDataLocally(data) {
+            const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `experiment_data_${data.participant}_${new Date().toISOString()}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        // Download data as JSON
+        function downloadDataAsJSON() {
+            const now = new Date();
+            const timestamp = now.toISOString().replace(/[:.]/g, '-');
+            const dataStr = JSON.stringify(experimentData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const dataUrl = URL.createObjectURL(dataBlob);
+            
+            const downloadLink = document.createElement('a');
+            downloadLink.href = dataUrl;
+            downloadLink.download = `experiment_data_${experimentData.participant}_${timestamp}.json`;
+            downloadLink.click();
+        }
+
+        // Download data as CSV
+        function downloadDataAsCSV() {
+            let csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += "timestamp,x,y,component\n";
+            
+            experimentData.gazeData.forEach(gaze => {
+                csvContent += `${gaze.timestamp},${gaze.x},${gaze.y},${gaze.component}\n`;
+            });
+            
+            const encodedUri = encodeURI(csvContent);
+            const now = new Date();
+            const timestamp = now.toISOString().replace(/[:.]/g, '-');
+            const downloadLink = document.createElement("a");
+            downloadLink.setAttribute("href", encodedUri);
+            downloadLink.setAttribute("download", `gaze_data_${experimentData.participant}_${timestamp}.csv`);
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        }
+
+        // Initialize participant ID when page loads
+        window.addEventListener('DOMContentLoaded', () => {
+            participantIDInput.value = generateParticipantID();
+            
+            // Setup gaze dot toggle
+            toggleGazeButton.addEventListener('click', toggleGazeDot);
+            
+            // Start experiment when button is clicked
+            startButton.addEventListener('click', async function() {
+                if (!document.getElementById('consentCheckbox').checked) {
+                    alert('You must consent to participate in the experiment');
+                    return;
+                }
+                
+                // Record participant info
+                experimentData.participant = participantIDInput.value;
+                experimentData.gender = document.getElementById('gender').value;
+                experimentData.age = document.getElementById('age').value;
+                experimentData.race = document.getElementById('race').value;
+                experimentData.ethnicity = document.getElementById('ethnicity').value;
+                experimentData.comments = document.getElementById('comments').value;
+                experimentData.consentTimestamp = new Date().toISOString();
+                
+                // Hide consent form
+                consentForm.style.display = 'none';
+                
+                // Show eye tracking instructions
+                instructions.style.display = 'block';
+                instructions.innerHTML = `
+                    <h2>Eye Tracking Setup</h2>
+                    <p>We'll now set up the eye tracker. Please:</p>
+                    <ol>
+                        <li>Allow camera access when prompted</li>
+                        <li>Keep your head still</li>
+                        <li>Click on each red dot as it appears</li>
+                    </ol>
+                    <button id="startCalibration">Begin Calibration</button>
+                `;
+                
+                document.getElementById('startCalibration').addEventListener('click', async function() {
+                    instructions.style.display = 'none';
+                    
+                    let eyeTrackingEnabled = false;
+                    try {
+                        await initWebgazer();
+                        await calibrateWebgazer();
+                        eyeTrackingEnabled = true;
+                    } catch (error) {
+                        console.error("Eye tracking setup failed:", error);
+                        webgazerContainer.style.display = 'none';
+                    }
+                    
+                    // Proceed with experiment
+                    instructions.style.display = 'block';
+                    instructions.innerHTML = `
+                        <h2>Main Task Instructions</h2>
+                        <p>Only click the big white square one time every 15 seconds.</p>
+                        <p>When the small square appears, click it quickly.</p>
+                        ${!eyeTrackingEnabled ? '<p style="color:yellow;">Note: Eye tracking is not active</p>' : ''}
+                        <p>Press any key to begin.</p>
+                    `;
+                    
+                    document.addEventListener('keydown', function startHandler() {
+                        document.removeEventListener('keydown', startHandler);
+                        instructions.style.display = 'none';
+                        
+                        // Start main experiment
+                        mainSquare.onclick = handleMainSquareClick;
+                        experimentStartTime = Date.now();
+                        startComponent();
+                    }, {once: true});
+                });
+            });
+        });
+
+        // Make functions available globally
+        window.downloadDataAsJSON = downloadDataAsJSON;
+        window.downloadDataAsCSV = downloadDataAsCSV;
+    </script>
+</body>
+</html>

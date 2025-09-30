@@ -1,0 +1,385 @@
+{
+    "participant": "000001",
+    "gender": "",
+    "age": "",
+    "race": "",
+    "ethnicity": "",
+    "comments": "",
+    "consentTimestamp": "2025-04-08T05:00:30.929Z",
+    "componentOrder": [
+        1,
+        2,
+        1,
+        2,
+        3,
+        4,
+        3,
+        4
+    ],
+    "phases": [
+        {
+            "component": 1,
+            "startTime": 0,
+            "settings": {
+                "random_min_time": 10,
+                "random_max_time": 20,
+                "end_phase_at_time": 120,
+                "points_per_click": 1,
+                "background": "green",
+                "text_color": "white",
+                "instructions_text": "Phase 1 Instructions",
+                "points_instructions": "Click the small square fast to earn points!"
+            }
+        },
+        {
+            "component": 2,
+            "startTime": 123.027,
+            "settings": {
+                "random_min_time": 10,
+                "random_max_time": 20,
+                "end_phase_at_time": 120,
+                "points_per_click": 1,
+                "background": "yellow",
+                "text_color": "black",
+                "instructions_text": "Phase 2 Instructions",
+                "points_instructions": ""
+            }
+        },
+        {
+            "component": 1,
+            "startTime": 246.045,
+            "settings": {
+                "random_min_time": 10,
+                "random_max_time": 20,
+                "end_phase_at_time": 120,
+                "points_per_click": 1,
+                "background": "green",
+                "text_color": "white",
+                "instructions_text": "Phase 1 Instructions",
+                "points_instructions": "Click the small square fast to earn points!"
+            }
+        },
+        {
+            "component": 2,
+            "startTime": 369.053,
+            "settings": {
+                "random_min_time": 10,
+                "random_max_time": 20,
+                "end_phase_at_time": 120,
+                "points_per_click": 1,
+                "background": "yellow",
+                "text_color": "black",
+                "instructions_text": "Phase 2 Instructions",
+                "points_instructions": ""
+            }
+        },
+        {
+            "component": 3,
+            "startTime": 492.065,
+            "settings": {
+                "random_min_time": 10,
+                "random_max_time": 20,
+                "end_phase_at_time": 120,
+                "points_per_click": 1,
+                "background": "red",
+                "text_color": "white",
+                "instructions_text": "Phase 3 Instructions",
+                "points_instructions": "Click quickly for points!"
+            }
+        },
+        {
+            "component": 4,
+            "startTime": 615.076,
+            "settings": {
+                "random_min_time": 10,
+                "random_max_time": 20,
+                "end_phase_at_time": 120,
+                "points_per_click": 0,
+                "background": "yellow",
+                "text_color": "black",
+                "instructions_text": "Phase 4 Instructions",
+                "points_instructions": ""
+            }
+        },
+        {
+            "component": 3,
+            "startTime": 738.087,
+            "settings": {
+                "random_min_time": 10,
+                "random_max_time": 20,
+                "end_phase_at_time": 120,
+                "points_per_click": 1,
+                "background": "red",
+                "text_color": "white",
+                "instructions_text": "Phase 3 Instructions",
+                "points_instructions": "Click quickly for points!"
+            }
+        },
+        {
+            "component": 4,
+            "startTime": 861.102,
+            "settings": {
+                "random_min_time": 10,
+                "random_max_time": 20,
+                "end_phase_at_time": 120,
+                "points_per_click": 0,
+                "background": "yellow",
+                "text_color": "black",
+                "instructions_text": "Phase 4 Instructions",
+                "points_instructions": ""
+            }
+        }
+    ],
+    "clicks": [
+        {
+            "type": "mainSquare",
+            "time": 1.317,
+            "score": 0,
+            "interval": 20,
+            "timeSinceSquareAppeared": 1.317,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 1.805,
+            "score": 0,
+            "interval": 20,
+            "timeSinceSquareAppeared": 1.805,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 1.947,
+            "score": 0,
+            "interval": 20,
+            "timeSinceSquareAppeared": 1.947,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 2.079,
+            "score": 0,
+            "interval": 20,
+            "timeSinceSquareAppeared": 2.079,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 2.187,
+            "score": 0,
+            "interval": 20,
+            "timeSinceSquareAppeared": 2.187,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 2.383,
+            "score": 0,
+            "interval": 20,
+            "timeSinceSquareAppeared": 2.383,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 2.514,
+            "score": 0,
+            "interval": 20,
+            "timeSinceSquareAppeared": 2.514,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 2.66,
+            "score": 0,
+            "interval": 20,
+            "timeSinceSquareAppeared": 2.66,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 2.783,
+            "score": 0,
+            "interval": 20,
+            "timeSinceSquareAppeared": 2.783,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 2.9,
+            "score": 0,
+            "interval": 20,
+            "timeSinceSquareAppeared": 2.9,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 3.143,
+            "score": 0,
+            "interval": 20,
+            "timeSinceSquareAppeared": 3.143,
+            "component": 1,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 375.805,
+            "score": 0,
+            "interval": 16,
+            "timeSinceSquareAppeared": 6.752,
+            "component": 2,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 375.949,
+            "score": 0,
+            "interval": 16,
+            "timeSinceSquareAppeared": 6.896,
+            "component": 2,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 376.091,
+            "score": 0,
+            "interval": 16,
+            "timeSinceSquareAppeared": 7.038,
+            "component": 2,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 376.232,
+            "score": 0,
+            "interval": 16,
+            "timeSinceSquareAppeared": 7.179,
+            "component": 2,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 376.659,
+            "score": 0,
+            "interval": 16,
+            "timeSinceSquareAppeared": 7.606,
+            "component": 2,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 376.814,
+            "score": 0,
+            "interval": 16,
+            "timeSinceSquareAppeared": 7.761,
+            "component": 2,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 376.961,
+            "score": 0,
+            "interval": 16,
+            "timeSinceSquareAppeared": 7.908,
+            "component": 2,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 377.103,
+            "score": 0,
+            "interval": 16,
+            "timeSinceSquareAppeared": 8.05,
+            "component": 2,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 377.231,
+            "score": 0,
+            "interval": 16,
+            "timeSinceSquareAppeared": 8.178,
+            "component": 2,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 377.351,
+            "score": 0,
+            "interval": 16,
+            "timeSinceSquareAppeared": 8.298,
+            "component": 2,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 377.491,
+            "score": 0,
+            "interval": 16,
+            "timeSinceSquareAppeared": 8.438,
+            "component": 2,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 377.635,
+            "score": 0,
+            "interval": 16,
+            "timeSinceSquareAppeared": 8.582,
+            "component": 2,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 377.773,
+            "score": 0,
+            "interval": 16,
+            "timeSinceSquareAppeared": 8.72,
+            "component": 2,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 377.917,
+            "score": 0,
+            "interval": 16,
+            "timeSinceSquareAppeared": 8.864,
+            "component": 2,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 378.053,
+            "score": 0,
+            "interval": 16,
+            "timeSinceSquareAppeared": 9,
+            "component": 2,
+            "valid": false
+        },
+        {
+            "type": "mainSquare",
+            "time": 635.864,
+            "score": 0,
+            "interval": 10,
+            "timeSinceSquareAppeared": 20.788,
+            "component": 4,
+            "valid": true
+        },
+        {
+            "type": "pointsSquare",
+            "time": 637.404,
+            "score": 0,
+            "component": 4
+        }
+    ],
+    "finalScore": 0
+}

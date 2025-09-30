@@ -1,0 +1,283 @@
+{
+    "participant": "000001",
+    "gender": "Male",
+    "age": "18",
+    "componentOrder": [
+        1,
+        2,
+        1,
+        2,
+        3,
+        4,
+        3,
+        4
+    ],
+    "phases": [
+        {
+            "component": 1,
+            "startTime": 0,
+            "settings": {
+                "random_min_time": 10,
+                "random_max_time": 20,
+                "end_phase_at_time": 120,
+                "points_per_click": 1,
+                "background": "green",
+                "text_color": "white",
+                "instructions_text": "Phase 1 Instructions",
+                "points_instructions": "Click the small square fast to earn points!"
+            }
+        },
+        {
+            "component": 2,
+            "startTime": 123.002,
+            "settings": {
+                "random_min_time": 10,
+                "random_max_time": 20,
+                "end_phase_at_time": 120,
+                "points_per_click": 1,
+                "background": "yellow",
+                "text_color": "black",
+                "instructions_text": "Phase 2 Instructions",
+                "points_instructions": ""
+            }
+        },
+        {
+            "component": 1,
+            "startTime": 246.011,
+            "settings": {
+                "random_min_time": 10,
+                "random_max_time": 20,
+                "end_phase_at_time": 120,
+                "points_per_click": 1,
+                "background": "green",
+                "text_color": "white",
+                "instructions_text": "Phase 1 Instructions",
+                "points_instructions": "Click the small square fast to earn points!"
+            }
+        },
+        {
+            "component": 2,
+            "startTime": 369.017,
+            "settings": {
+                "random_min_time": 10,
+                "random_max_time": 20,
+                "end_phase_at_time": 120,
+                "points_per_click": 1,
+                "background": "yellow",
+                "text_color": "black",
+                "instructions_text": "Phase 2 Instructions",
+                "points_instructions": ""
+            }
+        },
+        {
+            "component": 3,
+            "startTime": 492.023,
+            "settings": {
+                "random_min_time": 10,
+                "random_max_time": 20,
+                "end_phase_at_time": 120,
+                "points_per_click": 1,
+                "background": "red",
+                "text_color": "white",
+                "instructions_text": "Phase 3 Instructions",
+                "points_instructions": "Click quickly for points!"
+            }
+        },
+        {
+            "component": 4,
+            "startTime": 615.029,
+            "settings": {
+                "random_min_time": 10,
+                "random_max_time": 20,
+                "end_phase_at_time": 120,
+                "points_per_click": 0,
+                "background": "yellow",
+                "text_color": "black",
+                "instructions_text": "Phase 4 Instructions",
+                "points_instructions": ""
+            }
+        },
+        {
+            "component": 3,
+            "startTime": 738.03,
+            "settings": {
+                "random_min_time": 10,
+                "random_max_time": 20,
+                "end_phase_at_time": 120,
+                "points_per_click": 1,
+                "background": "red",
+                "text_color": "white",
+                "instructions_text": "Phase 3 Instructions",
+                "points_instructions": "Click quickly for points!"
+            }
+        },
+        {
+            "component": 4,
+            "startTime": 861.044,
+            "settings": {
+                "random_min_time": 10,
+                "random_max_time": 20,
+                "end_phase_at_time": 120,
+                "points_per_click": 0,
+                "background": "yellow",
+                "text_color": "black",
+                "instructions_text": "Phase 4 Instructions",
+                "points_instructions": ""
+            }
+        }
+    ],
+    "clicks": [
+        {
+            "type": "mainSquare",
+            "time": 19.143,
+            "score": 0,
+            "interval": 19,
+            "component": 1
+        },
+        {
+            "type": "pointsSquare",
+            "time": 20.141,
+            "score": 1,
+            "component": 1
+        },
+        {
+            "type": "mainSquare",
+            "time": 33.257,
+            "score": 1,
+            "interval": 12,
+            "component": 1
+        },
+        {
+            "type": "pointsSquare",
+            "time": 34.287,
+            "score": 2,
+            "component": 1
+        },
+        {
+            "type": "mainSquare",
+            "time": 48.303,
+            "score": 2,
+            "interval": 14,
+            "component": 1
+        },
+        {
+            "type": "pointsSquare",
+            "time": 49.335,
+            "score": 3,
+            "component": 1
+        },
+        {
+            "type": "mainSquare",
+            "time": 65.409,
+            "score": 3,
+            "interval": 16,
+            "component": 1
+        },
+        {
+            "type": "pointsSquare",
+            "time": 66.377,
+            "score": 4,
+            "component": 1
+        },
+        {
+            "type": "mainSquare",
+            "time": 99.413,
+            "score": 4,
+            "interval": 12,
+            "component": 1
+        },
+        {
+            "type": "pointsSquare",
+            "time": 100.294,
+            "score": 5,
+            "component": 1
+        },
+        {
+            "type": "mainSquare",
+            "time": 133.02,
+            "score": 5,
+            "interval": 10,
+            "component": 2
+        },
+        {
+            "type": "pointsSquare",
+            "time": 134.083,
+            "score": 6,
+            "component": 2
+        },
+        {
+            "type": "mainSquare",
+            "time": 151.166,
+            "score": 6,
+            "interval": 17,
+            "component": 2
+        },
+        {
+            "type": "mainSquare",
+            "time": 172.24,
+            "score": 6,
+            "interval": 10,
+            "component": 2
+        },
+        {
+            "type": "pointsSquare",
+            "time": 173.291,
+            "score": 7,
+            "component": 2
+        },
+        {
+            "type": "mainSquare",
+            "time": 264.018,
+            "score": 7,
+            "interval": 15,
+            "component": 1
+        },
+        {
+            "type": "pointsSquare",
+            "time": 265.336,
+            "score": 8,
+            "component": 1
+        },
+        {
+            "type": "mainSquare",
+            "time": 434.959,
+            "score": 8,
+            "interval": 14,
+            "component": 2
+        },
+        {
+            "type": "pointsSquare",
+            "time": 435.828,
+            "score": 9,
+            "component": 2
+        },
+        {
+            "type": "mainSquare",
+            "time": 504.057,
+            "score": 9,
+            "interval": 12,
+            "component": 3
+        },
+        {
+            "type": "mainSquare",
+            "time": 829.154,
+            "score": 9,
+            "interval": 19,
+            "component": 3
+        },
+        {
+            "type": "pointsSquare",
+            "time": 830.25,
+            "score": 10,
+            "component": 3
+        },
+        {
+            "type": "mainSquare",
+            "time": 842.402,
+            "score": 10,
+            "interval": 12,
+            "component": 3
+        }
+    ],
+    "finalScore": 10
+}

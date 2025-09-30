@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bouncing Ball Game</title>
+    <style>
+        canvas {
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <button id="downloadResults">Download Results</button>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const reinforcementTexts = [];
+        let totalScore = 0;
+        let gameResults = [];
+
+        class Ball {
+            constructor(x, y, radius, color, dx, dy) {
+                this.x = x;
+                this.y = y;
+                this.radius = radius;
+                this.color = color;
+                this.dx = dx;
+                this.dy = dy;
+                this.clicked = false;
+                this.score = 0;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.closePath();
+            }
+
+            move() {
+                this.x += this.dx;
+                this.y += this.dy;
+
+                // Bounce off walls
+                if (this.x + this.radius > canvas.width || this.x - this.radius < 0) this.dx *= -1;
+                if (this.y + this.radius > canvas.height || this.y - this.radius < 0) this.dy *= -1;
+            }
+        }
+
+        // Sample ball array with speeds
+        const balls = [
+            new Ball(100, 100, 30, 'red', 2, 2),
+            new Ball(200, 150, 30, 'blue', -3, 3), // Added comma here
+            new Ball(300, 200, 30, 'green', -2, 1), // This is the third ball
+             new Ball(30, 200, 30, 'green', -2, 1), // This is the third ball
+        ];
+    
+
+        function addReinforcementText(x, y) {
+            reinforcementTexts.push({ x: x, y: y, alpha: 1.0, fontSize: 24 });
+        }
+
+        function drawReinforcementTexts() {
+            reinforcementTexts.forEach((textObj, index) => {
+                textObj.y -= 1;          // Move the text up
+                textObj.alpha -= 0.02;   // Fade out the text
+                textObj.fontSize += 0.5; // Increase the font size
+                textObj.text = '+1'
+                if (textObj.alpha <= 0) {
+                    reinforcementTexts.splice(index, 1); // Remove when invisible
+                } else {
+                    const font = `${textObj.fontSize}px Arial`;
+                    const outlineColor = 'rgba(0, 0, 0, ' + textObj.alpha + ')';  // Black outline with fading alpha
+                    const fillColor = `rgba(255, 255, 255, ${textObj.alpha})`;    // White text with fading alpha
+                    const x = textObj.x;
+                    const y = textObj.y;
+                    const outlineThickness = 2;
+
+                    ctx.font = font;
+
+                    // Draw outline text in 8 directions around the main text
+                    ctx.fillStyle = outlineColor;
+                    ctx.fillText(textObj.text, x - outlineThickness, y - outlineThickness);
+                    ctx.fillText(textObj.text, x, y - outlineThickness);
+                    ctx.fillText(textObj.text, x + outlineThickness, y - outlineThickness);
+                    ctx.fillText(textObj.text, x - outlineThickness, y);
+                    ctx.fillText(textObj.text, x + outlineThickness, y);
+                    ctx.fillText(textObj.text, x - outlineThickness, y + outlineThickness);
+                    ctx.fillText(textObj.text, x, y + outlineThickness);
+                    ctx.fillText(textObj.text, x + outlineThickness, y + outlineThickness);
+
+                    // Draw the main white text
+                    ctx.fillStyle = fillColor;
+                    ctx.fillText(textObj.text, x, y);
+                }
+            });
+        }
+
+        function handleCollisions() {
+            for (let i = 0; i < balls.length; i++) {
+                for (let j = i + 1; j < balls.length; j++) {
+                    const b1 = balls[i];
+                    const b2 = balls[j];
+                    const dist = Math.hypot(b1.x - b2.x, b1.y - b2.y);
+                    if (dist < b1.radius + b2.radius) {
+                        changeVelocities(b1, b2);
+                    }
+                }
+            }
+        }
+
+        function changeVelocities(ball1, ball2) {
+            const m1 = ball1.radius ** 2;
+            const m2 = ball2.radius ** 2;
+            const M = m1 + m2;
+            const dx = ball1.x - ball2.x;
+            const dy = ball1.y - ball2.y;
+            const dist2 = dx * dx + dy * dy;
+            const v1 = [ball1.dx, ball1.dy];
+            const v2 = [ball2.dx, ball2.dy];
+
+            // Update velocities based on the elastic collision formula
+            const dotProd1 = ((v1[0] - v2[0]) * dx + (v1[1] - v2[1]) * dy) / dist2;
+            const dotProd2 = ((v2[0] - v1[0]) * dx + (v2[1] - v1[1]) * dy) / dist2;
+            ball1.dx -= 2 * m2 / M * dotProd1 * dx;
+            ball1.dy -= 2 * m2 / M * dotProd1 * dy;
+            ball2.dx -= 2 * m1 / M * dotProd2 * dx;
+            ball2.dy -= 2 * m1 / M * dotProd2 * dy;
+        }
+
+        function updateGame() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Move and draw balls
+            balls.forEach(ball => {
+                ball.move();
+                ball.draw();
+            });
+
+            handleCollisions();
+            drawReinforcementTexts();
+
+            requestAnimationFrame(updateGame);
+        }
+
+        canvas.addEventListener('mousedown', function (event) {
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = event.clientX - rect.left;
+            const mouseY = event.clientY - rect.top;
+
+            balls.forEach(ball => {
+                const distance = Math.hypot(mouseX - ball.x, mouseY - ball.y);
+                if (distance < ball.radius) {
+                    ball.clicked = true;
+                    ball.score += 1;
+                    totalScore += 1;
+
+                    // Add reinforcement text
+                    addReinforcementText(ball.x, ball.y);
+
+                    // Log the event
+                    const log = `Time: ${Date.now()}, Ball Color: ${ball.color}, Score: ${totalScore}`;
+                    gameResults.push(log);
+                }
+            });
+        });
+
+        document.getElementById('downloadResults').addEventListener('click', function () {
+            const blob = new Blob([gameResults.join('\n')], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'game_results.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        // Start the game loop
+        updateGame();
+    </script>
+</body>
+</html>
